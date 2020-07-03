@@ -1,7 +1,7 @@
 module SphereQuadratures
 
 include(joinpath(".","Types.jl"))
-export SphereQuadrature
+export SphereQuadraturervec
 
 include(joinpath(".","Utils.jl"))
 export readquadrature
@@ -13,7 +13,7 @@ using the SphereQuadrature quad.
 f: function of 3 director cosines f(r1,r2,r3)
 quad: SphereQuadrature with fields r1v,r2v,r3v,wv
 """
-function computeSphereQuad(f::Function, quad::SphereQuadrature)
+function computeSphereQuad(f::Function, quad::SphereQuadraturervec)
     r1Vec = quad.r1Vec
     r2Vec = quad.r2Vec
     r3Vec = quad.r3Vec
@@ -29,12 +29,20 @@ function computeSphereQuad(f::Function, quad::SphereQuadrature)
     return sum
 end
 
-BazantSphere21 = SphereQuadrature(readquadrature("BazantSphere21.txt")...)
+# Bazant Quadrature
+BazantSphere21 = SphereQuadraturervec(readquadrature("BazantSphere21.txt")...)
 
 intSBazant21(f) = computeSphereQuad(f, BazantSphere21)
 
-export computeSphereQuad, intSBazant21
+# Slan Quadrature 10k points
 
-export BazantSphere21
+SlanSphere10k = SphereQuadraturervec(readquadrature("SlanSphere10k.txt")...)
+
+intSlan10k(f) = computeSphereQuad(f, BazantSphere21)
+
+
+export computeSphereQuad, intSBazant21, intSlan10k
+
+export BazantSphere21, SlanSphere10k
 
 end #module

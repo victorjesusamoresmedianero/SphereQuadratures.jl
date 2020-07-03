@@ -1,5 +1,5 @@
 # Contains all the data relative to quadrature in the sphere
-struct SphereQuadrature
+struct SphereQuadraturervec
     r1Vec::Array{Float64}
     r2Vec::Array{Float64}
     r3Vec::Array{Float64}
