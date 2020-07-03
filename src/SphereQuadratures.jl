@@ -18,27 +18,28 @@ function computeSphereQuad(f::Function, quad::SphereQuadraturervec)
     r2Vec = quad.r2Vec
     r3Vec = quad.r3Vec
     wVec = quad.wVec
-    sum = 0.
+    wsum = sum(wVec)
+    Sintegral = 0.
     for i = 1 : length(r1Vec)
         r1 = r1Vec[i]
         r2 = r2Vec[i]
         r3 = r3Vec[i]
-        w = wVec[i]
-        sum += f(r1,r2,r3)*w
+        w = wVec[i]/wsum
+        Sintegral += f(r1,r2,r3)*w
     end
-    return sum
+    return Sintegral
 end
 
 # Bazant Quadrature
-BazantSphere21 = SphereQuadraturervec(readquadrature("BazantSphere21.txt")...)
+BazantSphere21 = SphereQuadraturervec(readquadrature("BazantSphere21.txt", " ")...)
 
 intSBazant21(f) = computeSphereQuad(f, BazantSphere21)
 
 # Slan Quadrature 10k points
 
-SlanSphere10k = SphereQuadraturervec(readquadrature("SlanSphere10k.txt")...)
+SlanSphere10k = SphereQuadraturervec(readquadrature("SlanSphere10k.txt", ";")...)
 
-intSlan10k(f) = computeSphereQuad(f, BazantSphere21)
+intSlan10k(f) = computeSphereQuad(f, SlanSphere10k)
 
 
 export computeSphereQuad, intSBazant21, intSlan10k
