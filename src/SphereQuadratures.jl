@@ -41,9 +41,14 @@ SlanSphere10k = SphereQuadraturervec(readquadrature("SlanSphere10k.txt", ";")...
 
 intSlan10k(f) = computeSphereQuad(f, SlanSphere10k)
 
+# Ppal Quadrature
 
-export computeSphereQuad, intSBazant21, intSlan10k
+PpalQuadrature = SphereQuadraturevec(readquadrature("ppaldir.txt", " ")...)
 
-export BazantSphere21, SlanSphere10k
+intPpal(f) = computeSphereQuad(f, PpalQuadrature) 
+
+export computeSphereQuad, intSBazant21, intSlan10k, intPpal
+
+export BazantSphere21, SlanSphere10k, PpalQuadrature 
 
 end #module
