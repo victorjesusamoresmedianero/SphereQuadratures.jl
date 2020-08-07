@@ -1,9 +1,9 @@
 module SphereQuadratures
 
-include(joinpath(".","Types.jl"))
+include("./Types.jl")
 export SphereQuadraturervec
 
-include(joinpath(".","Utils.jl"))
+include("./Utils.jl")
 export readquadrature
 
 """
@@ -19,7 +19,7 @@ function computeSphereQuad(f::Function, quad::SphereQuadraturervec)
     r3Vec = quad.r3Vec
     wVec = quad.wVec
     wsum = sum(wVec)
-    Sintegral = 0.
+    Sintegral = (0.)*f(r1Vec[1], r1Vec[2], r1Vec[3])
     for i = 1 : length(r1Vec)
         r1 = r1Vec[i]
         r2 = r2Vec[i]
@@ -43,7 +43,7 @@ intSlan10k(f) = computeSphereQuad(f, SlanSphere10k)
 
 # Ppal Quadrature
 
-PpalQuadrature = SphereQuadraturevec(readquadrature("ppaldir.txt", " ")...)
+PpalQuadrature = SphereQuadraturervec(readquadrature("ppaldir.txt", " ")...)
 
 intPpal(f) = computeSphereQuad(f, PpalQuadrature) 
 

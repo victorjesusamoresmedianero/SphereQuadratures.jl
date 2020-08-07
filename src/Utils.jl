@@ -3,6 +3,6 @@ import CSV
 
 function readquadrature(filename::String, delimiter)
     quadFile = CSV.read(joinpath(@__DIR__,"quadDir", filename), delim = delimiter)
-    return collect(quadFile.r1), collect(quadFile.r2),
-           collect(quadFile.r3), collect(quadFile.w)
+    return quadFile.r1, quadFile.r2,
+           quadFile.r3, quadFile.w
 end
