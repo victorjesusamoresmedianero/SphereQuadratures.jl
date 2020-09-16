@@ -1,3 +1,11 @@
+"""
+This module provides tools to perform numerical integration on the sphere
+for that, it provides different quadratures:
+
+1. intSBazant21: Bazant quadrature 21 points
+2. SlanSphere10k: Quadrature Slan 10000 points
+3. intPpal: Quadrature with just 3 points in the ppal dir
+"""
 module SphereQuadratures
 
 include("./Types.jl")
